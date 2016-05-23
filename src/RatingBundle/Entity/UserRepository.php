@@ -1,6 +1,6 @@
 <?php
 
-namespace RatingBundle\Repositories;
+namespace RatingBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 
 /**

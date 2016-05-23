@@ -5,7 +5,7 @@ namespace RatingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Reviews
+ * Review
  *
  * @ORM\Table(name="reviews", indexes={@ORM\Index(name="fk_reviews_user_id", columns={"user_id"})})
  * @ORM\Entity

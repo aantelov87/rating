@@ -23,5 +23,5 @@ function makeIFrame(url) {
 }
 window.onload = function () {
     var url = "{{ url('rating_average', { 'userId':user }) | raw }}"
-    makeIFrame()
+    makeIFrame(url)
 }

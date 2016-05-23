@@ -3,12 +3,13 @@
 namespace RatingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use RatingBundle\Entity\UserRepository;
 
 /**
- * Users
+ * User
  *
  * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass="RatingBundle\Repositories\UserRepository")
+ * @ORM\Entity(repositoryClass="RatingBundle\Entity\UserRepository")
  */
 class User
 {
