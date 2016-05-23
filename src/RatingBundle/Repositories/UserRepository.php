@@ -15,11 +15,11 @@ class UserRepository extends EntityRepository
      * @param $userID
      * @return array
      */
-    public function getUserAverageRating($userID){
+    public function calculateUserAverageRating($userID){
 
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT round(AVG(r.rating),0) as avg_rate FROM RatingBundle:Reviews r WHERE r.user > :user_id'
+                'SELECT round(AVG(r.rating),0) as avg_rate FROM RatingBundle:Review r WHERE r.user > :user_id'
             )
             ->setParameter('user_id', $userID)
             ->getSingleScalarResult();

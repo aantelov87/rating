@@ -1,6 +1,7 @@
 services:
+
     user_repository:
-        class: Doctrine\ORM\EntityRepository
+        class: RatingBundle\Repositories\UserRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments:
-            - RatingBundle\Entity\Users
+            - RatingBundle\Entity\User

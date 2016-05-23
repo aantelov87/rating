@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="RatingBundle\Repositories\UserRepository")
  */
-class Users
+class User
 {
     /**
      * @var string
