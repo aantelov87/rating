@@ -5,7 +5,7 @@ namespace RatingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Review
+ * Review.
  *
  * @ORM\Table(name="reviews", indexes={@ORM\Index(name="fk_reviews_user_id", columns={"user_id"})})
  * @ORM\Entity
@@ -20,9 +20,9 @@ class Review
      * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
-    
+
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="rating", type="integer", nullable=false)
      */
@@ -45,12 +45,10 @@ class Review
      */
     private $user;
 
-
-
     /**
-     * Set rating
+     * Set rating.
      *
-     * @param integer $rating
+     * @param int $rating
      *
      * @return Review
      */
@@ -62,9 +60,9 @@ class Review
     }
 
     /**
-     * Get rating
+     * Get rating.
      *
-     * @return integer
+     * @return int
      */
     public function getRating()
     {
@@ -72,7 +70,7 @@ class Review
     }
 
     /**
-     * Set ratedAt
+     * Set ratedAt.
      *
      * @param \DateTime $ratedAt
      *
@@ -86,7 +84,7 @@ class Review
     }
 
     /**
-     * Get ratedAt
+     * Get ratedAt.
      *
      * @return \DateTime
      */
@@ -96,7 +94,7 @@ class Review
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return string
      */
@@ -106,7 +104,7 @@ class Review
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \RatingBundle\Entity\Users $user
      *
@@ -120,7 +118,7 @@ class Review
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \RatingBundle\Entity\Users
      */

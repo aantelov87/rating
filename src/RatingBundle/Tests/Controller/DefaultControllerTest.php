@@ -1,15 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aantelov
- * Date: 5/24/16
- * Time: 4:40 PM
- */
 
 namespace RatingBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Class DefaultControllerTest.
+ *
+ * @author Antonio Antelo Vazquez (aantelov87[at]gmail.com)
+ */
 class DefaultControllerTest extends WebTestCase
 {
     public function testWidget()
@@ -20,15 +19,14 @@ class DefaultControllerTest extends WebTestCase
             ['c7b14b9f-21c0-11e6-b374-0242ac110003', [404, 'text/html; charset=UTF-8', 'Resource not found']],
         ];
 
-        foreach($userWidgetCase as $widgetCase){
+        foreach ($userWidgetCase as $widgetCase) {
             $client = static::createClient();
             $expectedResult = $widgetCase[1];
             $client->request('GET', "/widget/{$widgetCase[0]}.js");
             $this->assertSame($expectedResult[0], $client->getResponse()->getStatusCode());
             $this->assertSame($expectedResult[1], $client->getResponse()->headers->get('Content-Type'));
-            $this->assertTrue( FALSE !== strpos($client->getResponse()->getContent(), $expectedResult[2]));
+            $this->assertTrue(false !== strpos($client->getResponse()->getContent(), $expectedResult[2]));
         }
-
     }
 
     public function testViewRating()
@@ -40,21 +38,17 @@ class DefaultControllerTest extends WebTestCase
             ['c7b14b9f-21c0-11e6-b374-0242ac110003', [404, 'text/html; charset=UTF-8', 'Resource not found']],
         ];
 
-        foreach($userWidgetCase as $widgetCase){
+        foreach ($userWidgetCase as $widgetCase) {
             $client = static::createClient();
             $expectedResult = $widgetCase[1];
             $crawler = $client->request('GET', "/user/{$widgetCase[0]}/rating_average");
             $this->assertSame($expectedResult[0], $client->getResponse()->getStatusCode());
             $this->assertSame($expectedResult[1], $client->getResponse()->headers->get('Content-Type'));
-            if ($client->getResponse()->isSuccessful()){
-                print $expectedResult[2]."----".$crawler->filter("span.widget-content")->text();
-                $this->assertSame($expectedResult[2], $crawler->filter("span.widget-content")->text());
+            if ($client->getResponse()->isSuccessful()) {
+                $this->assertSame($expectedResult[2], $crawler->filter('span.widget-content')->text());
             } else {
-                $this->assertTrue( FALSE !== strpos($client->getResponse()->getContent(), $expectedResult[2]));
+                $this->assertTrue(false !== strpos($client->getResponse()->getContent(), $expectedResult[2]));
             }
-            
-
         }
-
     }
 }

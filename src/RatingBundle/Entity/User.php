@@ -3,12 +3,12 @@
 namespace RatingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 /**
- * User
+ * User.
  *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="RatingBundle\Repositories\UserRepository")
- *
  */
 class User
 {
@@ -27,7 +27,7 @@ class User
     private $password;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="active", type="boolean", nullable=false)
      */
@@ -42,10 +42,8 @@ class User
      */
     private $id;
 
-
-
     /**
-     * Set username
+     * Set username.
      *
      * @param string $username
      *
@@ -59,7 +57,7 @@ class User
     }
 
     /**
-     * Get username
+     * Get username.
      *
      * @return string
      */
@@ -69,7 +67,7 @@ class User
     }
 
     /**
-     * Set password
+     * Set password.
      *
      * @param string $password
      *
@@ -83,7 +81,7 @@ class User
     }
 
     /**
-     * Get password
+     * Get password.
      *
      * @return string
      */
@@ -93,9 +91,9 @@ class User
     }
 
     /**
-     * Set active
+     * Set active.
      *
-     * @param boolean $active
+     * @param bool $active
      *
      * @return User
      */
@@ -107,9 +105,9 @@ class User
     }
 
     /**
-     * Get active
+     * Get active.
      *
-     * @return boolean
+     * @return bool
      */
     public function getActive()
     {
@@ -117,7 +115,7 @@ class User
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return string
      */
