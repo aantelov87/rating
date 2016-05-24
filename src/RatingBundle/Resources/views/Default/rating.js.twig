@@ -1,30 +1,38 @@
+/**
+ * Function to inject <iframe> into <body> with 100x100 px
+ * on the bottom right corner with position fixed.
+ *
+ * @param url
+ * @returns {boolean}
+ */
 function makeIFrame(url) {
-    var ifrm = document.getElementById('rating_iframe');
-    console.log(ifrm);
-    if(!ifrm){
-        ifrm = document.createElement("iframe");
-        ifrm.id = 'rating_iframe';
-        ifrm.setAttribute("src", url);
-        ifrm.setAttribute("align", "center");
-        ifrm.style.padding         = "0px";
-        ifrm.style.margin          = "0px";
-        ifrm.style.border          = "0px";
-        ifrm.style.width           = "100px";
-        ifrm.style.height          = "100px";
-        ifrm.style.color           = '#fff';
-        ifrm.style.position        = 'fixed';
-        ifrm.style.bottom          = 0;
-        ifrm.style.right           = 0;
-        ifrm.style.zIndex          = 100;
-        ifrm.style.fontFamily      = 'Arial, Helvetica, sans';
-        document.body.appendChild(ifrm);
+    var html_ifrm = document.getElementById('ifrmRating');
+    if(!html_ifrm){
+        html_ifrm = document.createElement("iframe");
+        html_ifrm.id = 'ifrmRating';
+        html_ifrm.setAttribute("src", url);
+        html_ifrm.setAttribute("align", "center");
+        html_ifrm.style.padding         = "0px";
+        html_ifrm.style.margin          = "0px";
+        html_ifrm.style.border          = "0px";
+        html_ifrm.style.width           = "100px";
+        html_ifrm.style.height          = "100px";
+        html_ifrm.style.color           = '#fff';
+        html_ifrm.style.position        = 'fixed';
+        html_ifrm.style.bottom          = 0;
+        html_ifrm.style.right           = 0;
+        html_ifrm.style.zIndex          = 100;
+        html_ifrm.style.fontFamily      = 'Arial, Helvetica, sans';
+        document.body.appendChild(html_ifrm);
     }else{
-        ifrm.setAttribute("src", url);
-        ifrm.style.display="";
+        html_ifrm.setAttribute("src", url);
+        html_ifrm.style.display="";
     }
     return false;
 }
+//After load page insert iframe on the body
 window.onload = function () {
-    var url = "{{ url('rating_average', { 'userId': user.id }) | raw }}"
-    makeIFrame(url)
+    // Generate the absolute route
+    var url = "{{ url('rating_average', { 'userId': user.id }) | raw }}";
+    makeIFrame(url);
 }

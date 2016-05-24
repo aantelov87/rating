@@ -1,7 +1,9 @@
 services:
+# I spent many time checking why? it is not working. I guess that I have to check more because in old version was working
+
 #    user_repository:
 #        class: RatingBundle\Repositories\UserRepository
-#        factory_service: doctrine
+#        factory_service: doctrine.orm.entity_manager
 #        factory_method: getRepository
 #        arguments:
 #          - RatingBundle:User

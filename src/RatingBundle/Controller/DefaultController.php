@@ -1,11 +1,16 @@
 <?php
-
 namespace RatingBundle\Controller;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Response;
+/**
+ * Class DefaultController
+ * @package RatingBundle\Controller
+ *
+ * @author Antonio Antelo Vazquez (aantelov87[at]gmail.com)
+ */
 class DefaultController extends Controller
 {
     /**
@@ -19,9 +24,13 @@ class DefaultController extends Controller
             throw new NotFoundHttpException("Resource not found");
         }
 
-        return $this->render('RatingBundle:Default:rating.js.twig', [
-            'user'=>$user
-        ]);
+        $response = new Response(
+            $this->renderView('RatingBundle:Default:rating.js.twig', [
+                'user'=>$user
+            ])
+        );
+        $response->headers->set('Content-Type', 'application/javascript');
+        return $response;
     }
 
     /**
