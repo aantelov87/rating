@@ -1,6 +1,17 @@
 imports:
     - { resource: config_dev.yml }
 
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     192.168.99.100
+        port:     3306
+        dbname:   rating_test
+        user:     admin
+        password: eaaME3E9Faam
+        charset:  UTF8
+
 framework:
     test: ~
     session:

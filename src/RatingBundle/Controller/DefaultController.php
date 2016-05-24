@@ -29,7 +29,7 @@ class DefaultController extends Controller
                 'user'=>$user
             ])
         );
-        $response->headers->set('Content-Type', 'application/javascript');
+        $response->headers->set('Content-Type', 'application/javascript; charset=UTF-8');
         return $response;
     }
 
