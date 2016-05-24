@@ -2,7 +2,7 @@
 
 namespace RatingBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {

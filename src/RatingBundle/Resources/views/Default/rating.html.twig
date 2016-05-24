@@ -1,1 +1,25 @@
-Hola mundo {{ rating | default("0") }}%
+{% extends "widget.html.twig" %}
+
+ {% block stylesheets %}
+    <style>
+        .widget-box {
+            width: 100%;
+            height: 100%;
+            display: table;
+            text-align: center;
+            background-color: #0000F0;
+        }
+        .widget-box > .widget-content {
+            display: table-cell;
+            vertical-align: middle;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="widget-box">
+    <span class="widget-content">{{ rating | round | default("0") }}% </span>
+</div>
+{% endblock %}

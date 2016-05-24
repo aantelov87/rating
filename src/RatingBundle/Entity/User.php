@@ -3,13 +3,11 @@
 namespace RatingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use RatingBundle\Entity\UserRepository;
-
 /**
  * User
  *
  * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass="RatingBundle\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="RatingBundle\Repositories\UserRepository")
  */
 class User
 {
@@ -39,7 +37,7 @@ class User
      *
      * @ORM\Column(name="id", type="string", length=36)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
 

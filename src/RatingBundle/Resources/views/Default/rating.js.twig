@@ -1,17 +1,20 @@
 function makeIFrame(url) {
     var ifrm = document.getElementById('rating_iframe');
+    console.log(ifrm);
     if(!ifrm){
-        ifrm = document.createElement("rating_iframe");
+        ifrm = document.createElement("iframe");
         ifrm.id = 'rating_iframe';
         ifrm.setAttribute("src", url);
         ifrm.setAttribute("align", "center");
-        ifrm.style.width   = "100px";
-        ifrm.style.height  = "100px";
+        ifrm.style.padding         = "0px";
+        ifrm.style.margin          = "0px";
+        ifrm.style.border          = "0px";
+        ifrm.style.width           = "100px";
+        ifrm.style.height          = "100px";
         ifrm.style.color           = '#fff';
         ifrm.style.position        = 'fixed';
         ifrm.style.bottom          = 0;
         ifrm.style.right           = 0;
-        ifrm.style.backgroundColor = '#0073CF';
         ifrm.style.zIndex          = 100;
         ifrm.style.fontFamily      = 'Arial, Helvetica, sans';
         document.body.appendChild(ifrm);
@@ -22,6 +25,6 @@ function makeIFrame(url) {
     return false;
 }
 window.onload = function () {
-    var url = "{{ url('rating_average', { 'userId':user }) | raw }}"
+    var url = "{{ url('rating_average', { 'userId': user.id }) | raw }}"
     makeIFrame(url)
 }

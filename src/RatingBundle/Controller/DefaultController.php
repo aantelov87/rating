@@ -2,10 +2,9 @@
 
 namespace RatingBundle\Controller;
 
-use RatingBundle\Repositories\UserRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\BrowserKit\Request;
 
 class DefaultController extends Controller
 {
@@ -14,7 +13,8 @@ class DefaultController extends Controller
      */
     public function widgetAction($userId)
     {
-        $user = $userId;//$this->get("user_repository")->find($userId);
+        $userRepository = $this->getDoctrine()->getRepository("RatingBundle:User");
+        $user = $userRepository->find($userId);
         if (!$user){
             throw new NotFoundHttpException("Resource not found");
         }
@@ -29,16 +29,17 @@ class DefaultController extends Controller
      */
     public function viewRatingAction($userId)
     {
-        $user = $userId;//$this->get("user_repository")->find($userId);
+        $userRepository = $this->getDoctrine()->getRepository("RatingBundle:User");
+        $user = $userRepository->find($userId);
         if (!$user){
             throw new NotFoundHttpException("Resource not found");
         }
 
-        $avg = $this->get("user_repository")->calculateUserAverageRating($userId);
+        $avg = $userRepository->calculateUserAverageRating($user->getId());
         
         
         return $this->render('RatingBundle:Default:rating.html.twig', [
-            'rating'=>85
+            'rating'=>$avg
         ]);
     }
 }
