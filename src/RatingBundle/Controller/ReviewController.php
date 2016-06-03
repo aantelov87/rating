@@ -17,9 +17,12 @@ use RatingBundle\Form\ReviewType;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ReviewController extends Controller
 {
@@ -42,6 +45,30 @@ class ReviewController extends Controller
      */
     public function editAction(Review $review, Request $request){
         return $this->processForm($review, $request);
+    }
+
+    /**
+     * @Rest\View()
+     * @Route("/reviews/{id}", name="rating_review_delete")
+     * @Method({"DELETE"})
+     *
+     * @ParamConverter("review", class="RatingBundle:Review")
+     */
+    public function removeAction(Review $review, Request $request){
+        $em = $this->getDoctrine()->getEntityManager();
+        try{
+            $em->remove($review);
+            $em->flush();
+        }catch (Exception $exc){
+            return new JsonResponse([
+                'success'=> false,
+                'error_code' => $exc->getCode(),
+                'error_message' => $exc->getMessage()
+            ]);
+        }
+        return new JsonResponse([
+            'success'=> true
+        ]);
     }
 
     /**
@@ -74,8 +101,7 @@ class ReviewController extends Controller
 
         $form = $this->createForm(ReviewType::class, $r);
 
-        $form->handleRequest($request->getContent());
-        var_dump($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $r->save();
@@ -96,4 +122,5 @@ class ReviewController extends Controller
         }
         return View::create($form, 400);
     }
+
 }
