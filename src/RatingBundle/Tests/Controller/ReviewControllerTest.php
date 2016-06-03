@@ -16,7 +16,7 @@ class ReviewControllerTest extends WebTestCase
                 [
                     [
                     'user' => '9d19a2f4-21a3-11e6-b374-0242ac110003',
-                    'comments' => 'Testing comments',
+                    'comments' => 'Testing comments 1',
                     'rating' => '18'
                     ],
                     201
@@ -25,7 +25,7 @@ class ReviewControllerTest extends WebTestCase
                     [
                         'user' => '9d19a2f4-21a3-11e6-b374-0242ac110003',
                         'comments' => '',
-                        'rating' => '18'
+                        'rating' => '19'
                     ],
                     400
                 ],
@@ -49,24 +49,23 @@ class ReviewControllerTest extends WebTestCase
                         'comments' => 'Testing comments',
                         'rating' => '18'
                     ],
-                    404
+                    201
                 ]
         ];
     }
-
-    private $newReviewsId = [];
 
     /**
      * @dataProvider dataNewReviews
      */
     public function testNewAction($postParams, $expected){
         $client = static::createClient();
-
-        $client->request('POST', "/reviews/", $postParams, array(),    array(
+        
+        $client->request('POST', "/reviews/", array(), array(), array(
             'X-API-TOKEN'          => 'wGHkZpq43veHysyxKnrJkDxV',
-        ));
+            'HTTP_ACCEPT' => 'application/json'
+        ), json_encode($postParams));
 
-        print $client->getResponse()->getContent();
+        //print $client->getResponse()->getContent(). "hola";
         $this->assertSame($expected, $client->getResponse()->getStatusCode());
     }
 

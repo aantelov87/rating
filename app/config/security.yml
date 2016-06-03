@@ -15,19 +15,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
-
-#        secured_area:
-#            pattern: ^/reviews
-#            stateless: true
-#            simple_preauth:
-#                authenticator: apikey_authenticator
-#            provider: api_key_user_provider
+        secured_area:
+            pattern: ^/reviews
+            stateless: false
+            simple_preauth:
+                authenticator: apikey_authenticator
+            provider: api_key_user_provider

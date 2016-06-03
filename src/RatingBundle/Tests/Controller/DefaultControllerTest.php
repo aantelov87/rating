@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class DefaultControllerTest extends WebTestCase
 {
-    public function testWidget()
+    public function te2stWidget()
     {
         $userWidgetCase = [
             ['9d19a2f4-21a3-11e6-b374-0242ac110003', [200, 'application/javascript; charset=UTF-8', 'function']],
@@ -29,7 +29,7 @@ class DefaultControllerTest extends WebTestCase
         }
     }
 
-    public function testViewRating()
+    public function te2stViewRating()
     {
         $userWidgetCase = [
             ['9d19a2f4-21a3-11e6-b374-0242ac110003', [200, 'text/html; charset=UTF-8', '18%']],

@@ -17,6 +17,7 @@ use RatingBundle\Form\ReviewType;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 
@@ -73,9 +74,10 @@ class ReviewController extends Controller
 
         $form = $this->createForm(ReviewType::class, $r);
 
-        $form->handleRequest($request);
+        $form->handleRequest($request->getContent());
+        var_dump($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isValid()) {
             $r->save();
 
             $response = new Response();
@@ -92,7 +94,6 @@ class ReviewController extends Controller
 
             return $response;
         }
-
         return View::create($form, 400);
     }
 }
