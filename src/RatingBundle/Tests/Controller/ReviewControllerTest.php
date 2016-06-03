@@ -59,11 +59,11 @@ class ReviewControllerTest extends WebTestCase
      */
     public function testNewAction($postParams, $expected){
         $client = static::createClient();
-        
-        $client->request('POST', "/reviews/", array(), array(), array(
+
+        $client->request('POST', "/reviews/", $postParams, array(), array(
             'X-API-TOKEN'          => 'wGHkZpq43veHysyxKnrJkDxV',
-            'HTTP_ACCEPT' => 'application/json'
-        ), json_encode($postParams));
+            'HTTP_ACCEPT' => 'application/x-www-form-urlencoded '
+        ));
 
         //print $client->getResponse()->getContent(). "hola";
         $this->assertSame($expected, $client->getResponse()->getStatusCode());
