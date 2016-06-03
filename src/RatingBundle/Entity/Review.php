@@ -3,12 +3,20 @@
 namespace RatingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Review.
  *
  * @ORM\Table(name="reviews", indexes={@ORM\Index(name="fk_reviews_user_id", columns={"user_id"})})
  * @ORM\Entity
+ *
+ *
+ * @ExclusionPolicy("all")
  */
 class Review
 {
@@ -18,6 +26,8 @@ class Review
      * @ORM\Column(name="id", type="string", length=36)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
+     *
+     * @Expose
      */
     private $id;
 
@@ -25,13 +35,31 @@ class Review
      * @var int
      *
      * @ORM\Column(name="rating", type="integer", nullable=false)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Expose
      */
     private $rating;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comments", type="string", nullable=false, length=100)
+     *
+     * @Assert\Length(
+     *      min = 10
+     * )
+     * @Expose
+     */
+    private $comments;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="rated_at", type="datetime", nullable=false)
+     *
+     * @Expose
      */
     private $ratedAt = 'CURRENT_TIMESTAMP';
 
@@ -42,6 +70,8 @@ class Review
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
+     *
+     * @Assert\NotBlank()
      */
     private $user;
 
@@ -125,5 +155,34 @@ class Review
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @VirtualProperty
+     *
+     */
+    public function getUsername()
+    {
+        return $this->user->getUsername();
+    }
+
+    /**
+     * Get comments
+     *
+     * @return string
+     */
+    public function getComments(){
+        return $this->comments;
+    }
+
+
+    /**
+     * @param string $c
+     *
+     * @return Review
+     */
+    public function setComments($c){
+        $this->comments = $c;
+        return $this;
     }
 }

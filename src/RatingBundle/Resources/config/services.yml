@@ -7,3 +7,11 @@ services:
 #        factory_method: getRepository
 #        arguments:
 #          - RatingBundle:User
+
+services:
+    api_key_user_provider:
+        class: RatingBundle\Security\ApiKeyUserProvider
+
+    apikey_authenticator:
+        class:  RatingBundle\Security\ApiKeyAuthenticator
+        public: false

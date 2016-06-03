@@ -1,4 +1,5 @@
 rating:
     resource: "@RatingBundle/Controller/"
     type:     annotation
+    defaults: {_format: json}
     prefix:   /
