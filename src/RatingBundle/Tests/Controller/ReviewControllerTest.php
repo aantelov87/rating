@@ -5,7 +5,7 @@ namespace RatingBundle\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class DefaultControllerTest.
+ * Class ReviewsControllerTest.
  *
  * @author Antonio Antelo Vazquez (aantelov87[at]gmail.com)
  */
@@ -61,11 +61,10 @@ class ReviewControllerTest extends WebTestCase
         $client = static::createClient();
 
         $client->request('POST', "/reviews/", $postParams, array(), array(
-            'X-API-TOKEN'          => 'wGHkZpq43veHysyxKnrJkDxV',
-            'HTTP_ACCEPT' => 'application/x-www-form-urlencoded '
+            'X-API-TOKEN' => 'wGHkZpq43veHysyxKnrJkDxV',
+            'HTTP_ACCEPT' => 'application/x-www-form-urlencoded',
+            'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded',
         ));
-
-        //print $client->getResponse()->getContent(). "hola";
         $this->assertSame($expected, $client->getResponse()->getStatusCode());
     }
 

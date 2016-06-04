@@ -15,9 +15,11 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rating')
-            ->add('comments')
-            ->add('user')
+            ->add('rating', 'text')
+            ->add('comments', 'text')
+            ->add('user', 'entity', [
+                'class' => 'AppBundle:User'
+            ])
         ;
     }
     
@@ -27,7 +29,8 @@ class ReviewType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'RatingBundle\Entity\Review'
+            'data_class' => 'RatingBundle\Entity\Review',
+            'csrf_protection' => false
         ));
     }
 }

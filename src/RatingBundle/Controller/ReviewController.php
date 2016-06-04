@@ -98,14 +98,12 @@ class ReviewController extends Controller
     private function processForm(Review $r, Request $request)
     {
         $statusCode = empty($r->getId()) ? 201 : 204;
-
         $form = $this->createForm(ReviewType::class, $r);
-
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $r->save();
-
+            
             $response = new Response();
             $response->setStatusCode($statusCode);
 
