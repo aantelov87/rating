@@ -14,13 +14,14 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
      *
      * @return array
      */
-    public function calculateUserAverageRating($userID)
+    public function calculateUserAverageRating($userId)
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT AVG(r.rating) as avg_rate FROM RatingBundle:Review r WHERE r.user = :user_id'
+                'SELECT COALESCE(AVG(r.rating), 0) as avg, COUNT(r.id) as total, COALESCE(MAX(r.rating), 0) as max, 
+                 COALESCE(MIN(r.rating), 0) as min FROM RatingBundle:Review r WHERE r.user = :user_id'
             )
-            ->setParameter('user_id', $userID)
-            ->getSingleScalarResult();
+            ->setParameter('user_id', $userId)
+            ->getArrayResult();
     }
 }
